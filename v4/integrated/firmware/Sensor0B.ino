@@ -26,9 +26,7 @@ void DisableSensor0B()
 void ReadSensor0B(byte *sensorReading, int *readingLength)
 {
 	byte readarray[4];
-	wire.beginTransmission(HIH6130_ADDRESS);
-	wire.endTransmission();
-	DirectReadI2C(HIH6130_ADDRESS, 4, readarray, 10);
+	ReadI2C(HIH6130_ADDRESS, 4, readarray, 10);
 
 	for (int i = 0; i < 4; i++)
 	{
