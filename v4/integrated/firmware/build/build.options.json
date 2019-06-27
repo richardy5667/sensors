@@ -1,0 +1,10 @@
+{
+  "builtInLibrariesFolders": "/home/waggle-student/Documents/waggle_repo/toolset/arduino-1.6.7/libraries",
+  "customBuildProperties": "build.path=./build,build.warn_data_percentage=75",
+  "fqbn": "arduino:sam:arduino_due_x",
+  "hardwareFolders": "/home/waggle-student/Documents/waggle_repo/toolset/arduino-1.6.7/hardware,/home/waggle-student/.arduino15/packages",
+  "otherLibrariesFolders": "/home/waggle-student/Arduino/libraries",
+  "runtime.ide.version": "10607",
+  "sketchLocation": "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/firmware.ino",
+  "toolsFolders": "/home/waggle-student/Documents/waggle_repo/toolset/arduino-1.6.7/tools-builder,/home/waggle-student/Documents/waggle_repo/toolset/arduino-1.6.7/hardware/tools/avr,/home/waggle-student/.arduino15/packages"
+}
