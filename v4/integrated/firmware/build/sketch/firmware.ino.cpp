@@ -920,30 +920,32 @@ void ReadSensorFF(byte *sensorReading, int *readingLength);
 #line 48 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/SensorFF.ino"
 void WriteSensorFF(byte *packet);
 #line 3 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+void I2Cscan(int *count, byte *idarray);
+#line 28 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadI2C(byte address, int length, byte *out);
-#line 8 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 33 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadI2C(byte address, int length, byte *out, int time);
-#line 27 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 52 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void DirectReadI2C(byte address, int length, byte *out, int time);
-#line 44 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 69 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteI2C(byte address, int length, byte *in);
-#line 54 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
-void WriteReadI2C(byte address, int inlength, byte *in, int outlength, byte *out);
-#line 59 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
-void WriteReadI2C(byte address, int inlength, byte *in, int outlength, byte *out, int time);
 #line 79 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+void WriteReadI2C(byte address, int inlength, byte *in, int outlength, byte *out);
+#line 84 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+void WriteReadI2C(byte address, int inlength, byte *in, int outlength, byte *out, int time);
+#line 104 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 SPISettings SetSPI(long maxSpeed, byte bitOrder, byte dataMode, byte pin);
-#line 109 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 134 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadSPI(byte* buff, int bufflen, byte pin, SPISettings set);
-#line 114 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 139 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadSPI(byte* buff, int bufflen, byte pin, SPISettings set, int msdelay, int delayiter);
-#line 132 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 157 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteSPI(byte* buff, int bufflen, byte pin, SPISettings set);
-#line 137 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 162 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteSPI(byte* buff, int bufflen, byte pin, SPISettings set, int msdelay, int delayiter);
-#line 160 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 185 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void writeEEPROM(unsigned int memory_address, byte data_byte );
-#line 170 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 195 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 byte readEEPROM(unsigned int memory_address );
 #line 2 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/crc8waggle.ino"
 byte CRCcalc(byte dataLength, byte *packet);
@@ -983,33 +985,33 @@ int BusReturnPacketLength();
 void SortReading(byte *packet, int dataLength);
 #line 41 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorInit();
-#line 52 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 107 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorInit(byte *data, byte id);
-#line 65 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 120 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorConfig(byte *data, byte id);
-#line 78 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 133 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorEnable(byte id);
-#line 91 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 146 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorEnable(byte *data, byte id);
-#line 96 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 151 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorDisable(byte id);
-#line 109 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 164 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorDisable(byte *data, byte id);
-#line 114 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 169 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorRead(byte *data, byte id);
-#line 168 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 223 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void SensorWrite(byte *data, byte id);
-#line 185 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 240 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void BusInit(byte *data, byte id);
-#line 198 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 253 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void BusConfig(byte *data, byte id);
-#line 210 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+#line 265 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void BusEnable(byte *data, byte id);
-#line 222 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
-void BusDisable(byte *data, byte id);
-#line 234 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
-void BusRead(byte *data, byte id);
 #line 277 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+void BusDisable(byte *data, byte id);
+#line 289 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
+void BusRead(byte *data, byte id);
+#line 332 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/sorter.ino"
 void BusWrite(byte *data, byte id);
 #line 19
 void setup()
@@ -3120,6 +3122,26 @@ const FunctionType functype[] = {
 
 const int numType = sizeof(functype)/sizeof(functype[0]);
 
+#line 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/I2CaddressStruct.ino"
+struct I2Caddress
+{
+  const byte slaveaddress;
+  const byte sensorid;
+};
+
+const I2Caddress I2Cmap[]={
+  {0x48,0x01},
+  {0x40,0x02},
+  {0x77,0x04},
+  {0x1C,0x07},
+  {0x76,0x09},
+  {0x1E,0x0A},
+  {0x27,0x0B},
+  {0x69,0x0C},
+  {0x68,0x0D},
+  {0x4C,0x13}
+};
+
 #line 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/Sensor00.ino"
 // Met and Light macaddress
 
@@ -5074,6 +5096,31 @@ const int numSensor = sizeof(sensor)/sizeof(sensor[0]);
 #line 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 
 //** I2C
+void I2Cscan(int *count, byte *idarray)
+{
+	const byte addressStart = 0x00;
+  const byte addressEnd = 0x7F;
+  for (byte address = addressStart; address <= addressEnd; address++)
+  {
+    bool fnd = false;
+      Wire.beginTransmission (address);
+      fnd = (Wire.endTransmission () == 0);
+      // give device 5 millis
+      if (fnd)
+			{
+				delay(5);
+				for (int i=0; i<sizeof(I2Cmap); i++)
+				{
+					if (address==(I2Cmap+i)->slaveaddress)
+					{
+						idarray[*count]=(I2Cmap+i)->sensorid;
+						*count++;
+					}
+				}
+			}
+  }
+}
+
 void ReadI2C(byte address, int length, byte *out)
 {
 	ReadI2C(address, length, out, 0);
@@ -5085,14 +5132,14 @@ void ReadI2C(byte address, int length, byte *out, int time)
 	Wire.requestFrom(address, (byte)length);
 	delay(time);
 
-	if (Wire.available() > 0) 
+	if (Wire.available() > 0)
 	{
 		for (int i = 0; i < length; i++)
 			out[i] = Wire.read();
-	} 
-	else 
+	}
+	else
 	{
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++)
 			out[i] = 0xff;
 	}
 	Wire.endTransmission();
@@ -5103,14 +5150,14 @@ void DirectReadI2C(byte address, int length, byte *out, int time)
 	Wire.requestFrom(address, (byte)length);
 	delay(time);
 
-	if (Wire.available() > 0) 
+	if (Wire.available() > 0)
 	{
 		for (int i = 0; i < length; i++)
 			out[i] = Wire.read();
-	} 
-	else 
+	}
+	else
 	{
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++)
 			out[i] = 0xff;
 	}
 }
@@ -5229,7 +5276,7 @@ void WriteSPI(byte* buff, int bufflen, byte pin, SPISettings set, int msdelay, i
 
 
 //** EEPROM
-#define EEPROM_ADDRESS 0x50 
+#define EEPROM_ADDRESS 0x50
 
 void writeEEPROM (unsigned int memory_address, byte data_byte )
 {
@@ -5539,11 +5586,66 @@ void SortReading(byte *packet, int dataLength)
 void SensorInit()
 {
 	// Enable sensors
+	byte alivearray[sizeof(I2Cmap)];
+	int numberalive=0;
+	bool skipMCP342X=false;
+	I2Cscan(&numberalive, alivearray);
 	for (int i = 0; i < numSensor; i++)
 	{
 		const Sensor *s = sensor + i;
-		s->enableFunc();
-		s->initFunc();
+		bool isI2C=false;
+		bool aliveI2C=false;
+		for (int j=0; j<sizeof(I2Cmap); j++)
+		{
+			if (s->sensorid==(I2Cmap+j)->sensorid)
+			{
+				isI2C=true;
+				break;
+			}
+			else
+			{
+				isI2C=false;
+			}
+		}
+		if (isI2C)
+		{
+			for (int k=0; k<numberalive; k++)
+			{
+				if (s->sensorid==alivearray[k])
+					{
+						aliveI2C=true;
+						break;
+					}
+			}
+			if (!aliveI2C)
+			{
+				if (s->sensorid==0x0D)
+				{
+					s->disableFunc();
+					(s+1)->disableFunc();
+					(s+2)->disableFunc();
+					(s+3)->disableFunc();
+					skipMCP342X=true;
+				}
+				else
+				{
+					s->disableFunc();
+				}
+			}
+			else
+			{
+				s->enableFunc();
+				s->initFunc();
+			}
+		}
+		else
+		{
+			if(!skipMCP342X)
+			{
+				s->enableFunc();
+				s->initFunc();
+			}
+		}
 	}
 }
 

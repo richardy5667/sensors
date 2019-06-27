@@ -1,5 +1,30 @@
 
 //** I2C
+void I2Cscan(int *count, byte *idarray)
+{
+	const byte addressStart = 0x00;
+  const byte addressEnd = 0x7F;
+  for (byte address = addressStart; address <= addressEnd; address++)
+  {
+    bool fnd = false;
+      Wire.beginTransmission (address);
+      fnd = (Wire.endTransmission () == 0);
+      // give device 5 millis
+      if (fnd)
+			{
+				delay(5);
+				for (int i=0; i<sizeof(I2Cmap); i++)
+				{
+					if (address==(I2Cmap+i)->slaveaddress)
+					{
+						idarray[*count]=(I2Cmap+i)->sensorid;
+						*count++;
+					}
+				}
+			}
+  }
+}
+
 void ReadI2C(byte address, int length, byte *out)
 {
 	ReadI2C(address, length, out, 0);
@@ -11,14 +36,14 @@ void ReadI2C(byte address, int length, byte *out, int time)
 	Wire.requestFrom(address, (byte)length);
 	delay(time);
 
-	if (Wire.available() > 0) 
+	if (Wire.available() > 0)
 	{
 		for (int i = 0; i < length; i++)
 			out[i] = Wire.read();
-	} 
-	else 
+	}
+	else
 	{
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++)
 			out[i] = 0xff;
 	}
 	Wire.endTransmission();
@@ -29,14 +54,14 @@ void DirectReadI2C(byte address, int length, byte *out, int time)
 	Wire.requestFrom(address, (byte)length);
 	delay(time);
 
-	if (Wire.available() > 0) 
+	if (Wire.available() > 0)
 	{
 		for (int i = 0; i < length; i++)
 			out[i] = Wire.read();
-	} 
-	else 
+	}
+	else
 	{
-		for (int i = 0; i < length; i++) 
+		for (int i = 0; i < length; i++)
 			out[i] = 0xff;
 	}
 }
@@ -155,7 +180,7 @@ void WriteSPI(byte* buff, int bufflen, byte pin, SPISettings set, int msdelay, i
 
 
 //** EEPROM
-#define EEPROM_ADDRESS 0x50 
+#define EEPROM_ADDRESS 0x50
 
 void writeEEPROM (unsigned int memory_address, byte data_byte )
 {

@@ -22661,6 +22661,25 @@ const FunctionType functype[] = {
 };
 
 const int numType = sizeof(functype)/sizeof(functype[0]);
+# 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/I2CaddressStruct.ino"
+struct I2Caddress
+{
+  const byte slaveaddress;
+  const byte sensorid;
+};
+
+const I2Caddress I2Cmap[]={
+  {0x48,0x01},
+  {0x40,0x02},
+  {0x77,0x04},
+  {0x1C,0x07},
+  {0x76,0x09},
+  {0x1E,0x0A},
+  {0x27,0x0B},
+  {0x69,0x0C},
+  {0x68,0x0D},
+  {0x4C,0x13}
+};
 # 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/Sensor00.ino"
 // Met and Light macaddress
 
@@ -24532,17 +24551,17 @@ void DisableSensorFF()
 
 void ReadSensorFF(byte *sensorReading, int *readingLength)
 {
- int buildinfo_git = (int) strtol("d8df", 0, 16);
+ int buildinfo_git = (int) strtol("2fa5", 0, 16);
 
  sensorReading[0] = 3;
  sensorReading[1] = 1;
  sensorReading[2] = 4;
  sensorReading[3] = 14;
 
- sensorReading[4] = (1561581536 >> 24) & 0xFF;
- sensorReading[5] = (1561581536 >> 16) & 0xFF;
- sensorReading[6] = (1561581536 >> 8) & 0xFF;
- sensorReading[7] = 1561581536 & 0xFF;
+ sensorReading[4] = (1561668227 >> 24) & 0xFF;
+ sensorReading[5] = (1561668227 >> 16) & 0xFF;
+ sensorReading[6] = (1561668227 >> 8) & 0xFF;
+ sensorReading[7] = 1561668227 & 0xFF;
  sensorReading[8] = (buildinfo_git >> 8) & 0xFF;
  sensorReading[9] = buildinfo_git & 0xFF;
 
@@ -24602,6 +24621,31 @@ const int numSensor = sizeof(sensor)/sizeof(sensor[0]);
 # 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 
 //** I2C
+void I2Cscan(int *count, byte *idarray)
+{
+ const byte addressStart = 0x00;
+  const byte addressEnd = 0x7F;
+  for (byte address = addressStart; address <= addressEnd; address++)
+  {
+    bool fnd = 0x0;
+      Wire.beginTransmission (address);
+      fnd = (Wire.endTransmission () == 0);
+      // give device 5 millis
+      if (fnd)
+   {
+    delay(5);
+    for (int i=0; i<sizeof(I2Cmap); i++)
+    {
+     if (address==(I2Cmap+i)->slaveaddress)
+     {
+      idarray[*count]=(I2Cmap+i)->sensorid;
+      *count++;
+     }
+    }
+   }
+  }
+}
+
 void ReadI2C(byte address, int length, byte *out)
 {
  ReadI2C(address, length, out, 0);
@@ -25063,11 +25107,66 @@ void SortReading(byte *packet, int dataLength)
 void SensorInit()
 {
  // Enable sensors
+ byte alivearray[sizeof(I2Cmap)];
+ int numberalive=0;
+ bool skipMCP342X=0x0;
+ I2Cscan(&numberalive, alivearray);
  for (int i = 0; i < numSensor; i++)
  {
   const Sensor *s = sensor + i;
-  s->enableFunc();
-  s->initFunc();
+  bool isI2C=0x0;
+  bool aliveI2C=0x0;
+  for (int j=0; j<sizeof(I2Cmap); j++)
+  {
+   if (s->sensorid==(I2Cmap+j)->sensorid)
+   {
+    isI2C=0x1;
+    break;
+   }
+   else
+   {
+    isI2C=0x0;
+   }
+  }
+  if (isI2C)
+  {
+   for (int k=0; k<numberalive; k++)
+   {
+    if (s->sensorid==alivearray[k])
+     {
+      aliveI2C=0x1;
+      break;
+     }
+   }
+   if (!aliveI2C)
+   {
+    if (s->sensorid==0x0D)
+    {
+     s->disableFunc();
+     (s+1)->disableFunc();
+     (s+2)->disableFunc();
+     (s+3)->disableFunc();
+     skipMCP342X=0x1;
+    }
+    else
+    {
+     s->disableFunc();
+    }
+   }
+   else
+   {
+    s->enableFunc();
+    s->initFunc();
+   }
+  }
+  else
+  {
+   if(!skipMCP342X)
+   {
+    s->enableFunc();
+    s->initFunc();
+   }
+  }
  }
 }
 
