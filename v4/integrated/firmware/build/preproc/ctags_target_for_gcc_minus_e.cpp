@@ -24553,17 +24553,17 @@ void DisableSensorFF()
 
 void ReadSensorFF(byte *sensorReading, int *readingLength)
 {
- int buildinfo_git = (int) strtol("a153", 0, 16);
+ int buildinfo_git = (int) strtol("8af6", 0, 16);
 
  sensorReading[0] = 3;
  sensorReading[1] = 1;
  sensorReading[2] = 4;
  sensorReading[3] = 14;
 
- sensorReading[4] = (1561739572 >> 24) & 0xFF;
- sensorReading[5] = (1561739572 >> 16) & 0xFF;
- sensorReading[6] = (1561739572 >> 8) & 0xFF;
- sensorReading[7] = 1561739572 & 0xFF;
+ sensorReading[4] = (1561753475 >> 24) & 0xFF;
+ sensorReading[5] = (1561753475 >> 16) & 0xFF;
+ sensorReading[6] = (1561753475 >> 8) & 0xFF;
+ sensorReading[7] = 1561753475 & 0xFF;
  sensorReading[8] = (buildinfo_git >> 8) & 0xFF;
  sensorReading[9] = buildinfo_git & 0xFF;
 
