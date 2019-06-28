@@ -16,3 +16,5 @@ const I2Caddress I2Cmap[]={
   {0x68,0x0D},
   {0x4C,0x13}
 };
+
+const int I2Cnum = sizeof(I2Cmap)/sizeof(I2Cmap[0]);

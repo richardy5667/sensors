@@ -1,5 +1,6 @@
 
 //** I2C
+
 void I2Cscan(int *count, byte *idarray)
 {
 	const byte addressStart = 0x00;
@@ -8,17 +9,21 @@ void I2Cscan(int *count, byte *idarray)
   {
     bool fnd = false;
       Wire.beginTransmission (address);
+			if (address==HTDU21D_ADDRESS)
+			{
+				Wire.write(0xFE);	//HTU21D needs a soft reset to respond correctly
+			}
       fnd = (Wire.endTransmission () == 0);
       // give device 5 millis
       if (fnd)
 			{
 				delay(5);
-				for (int i=0; i<sizeof(I2Cmap); i++)
+				for (int i=0; i<I2Cnum; i++)
 				{
-					if (address==(I2Cmap+i)->slaveaddress)
+					if (address==I2Cmap[i].slaveaddress)
 					{
-						idarray[*count]=(I2Cmap+i)->sensorid;
-						*count++;
+						idarray[*count]=I2Cmap[i].sensorid;
+						(*count)++;
 					}
 				}
 			}

@@ -41,7 +41,29 @@ void SortReading(byte *packet, int dataLength)
 void SensorInit()
 {
 	// Enable sensors
-	byte alivearray[sizeof(I2Cmap)];
+	pinMode(PIN_WIRE_SDA, INPUT);
+	pinMode(PIN_WIRE_SCL, INPUT);
+	if (digitalRead(PIN_WIRE_SDA) & digitalRead(PIN_WIRE_SCL))
+	{
+		Wire.begin();
+		delay(100);
+		ScanEnable();
+	}
+	else
+	{
+		for (int i=0; i<numSensor; i++)
+		{
+			Wire.begin();
+			delay(100);
+			const Sensor *s = sensor + i;
+			s->disableFunc();
+		}
+	}
+}
+
+void ScanEnable()
+{
+	byte alivearray[I2Cnum];
 	int numberalive=0;
 	bool skipMCP342X=false;
 	I2Cscan(&numberalive, alivearray);
@@ -50,9 +72,9 @@ void SensorInit()
 		const Sensor *s = sensor + i;
 		bool isI2C=false;
 		bool aliveI2C=false;
-		for (int j=0; j<sizeof(I2Cmap); j++)
+		for (int j=0; j<I2Cnum; j++)
 		{
-			if (s->sensorid==(I2Cmap+j)->sensorid)
+			if (s->sensorid==(I2Cmap[j].sensorid))
 			{
 				isI2C=true;
 				break;

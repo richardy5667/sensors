@@ -22680,6 +22680,8 @@ const I2Caddress I2Cmap[]={
   {0x68,0x0D},
   {0x4C,0x13}
 };
+
+const int I2Cnum = sizeof(I2Cmap)/sizeof(I2Cmap[0]);
 # 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/Sensor00.ino"
 // Met and Light macaddress
 
@@ -24551,17 +24553,17 @@ void DisableSensorFF()
 
 void ReadSensorFF(byte *sensorReading, int *readingLength)
 {
- int buildinfo_git = (int) strtol("2fa5", 0, 16);
+ int buildinfo_git = (int) strtol("a153", 0, 16);
 
  sensorReading[0] = 3;
  sensorReading[1] = 1;
  sensorReading[2] = 4;
  sensorReading[3] = 14;
 
- sensorReading[4] = (1561668227 >> 24) & 0xFF;
- sensorReading[5] = (1561668227 >> 16) & 0xFF;
- sensorReading[6] = (1561668227 >> 8) & 0xFF;
- sensorReading[7] = 1561668227 & 0xFF;
+ sensorReading[4] = (1561739572 >> 24) & 0xFF;
+ sensorReading[5] = (1561739572 >> 16) & 0xFF;
+ sensorReading[6] = (1561739572 >> 8) & 0xFF;
+ sensorReading[7] = 1561739572 & 0xFF;
  sensorReading[8] = (buildinfo_git >> 8) & 0xFF;
  sensorReading[9] = buildinfo_git & 0xFF;
 
@@ -24621,6 +24623,7 @@ const int numSensor = sizeof(sensor)/sizeof(sensor[0]);
 # 1 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 
 //** I2C
+
 void I2Cscan(int *count, byte *idarray)
 {
  const byte addressStart = 0x00;
@@ -24629,17 +24632,21 @@ void I2Cscan(int *count, byte *idarray)
   {
     bool fnd = 0x0;
       Wire.beginTransmission (address);
+   if (address==0x40)
+   {
+    Wire.write(0xFE); //HTU21D needs a soft reset to respond correctly
+   }
       fnd = (Wire.endTransmission () == 0);
       // give device 5 millis
       if (fnd)
    {
     delay(5);
-    for (int i=0; i<sizeof(I2Cmap); i++)
+    for (int i=0; i<I2Cnum; i++)
     {
-     if (address==(I2Cmap+i)->slaveaddress)
+     if (address==I2Cmap[i].slaveaddress)
      {
-      idarray[*count]=(I2Cmap+i)->sensorid;
-      *count++;
+      idarray[*count]=I2Cmap[i].sensorid;
+      (*count)++;
      }
     }
    }
@@ -25107,7 +25114,29 @@ void SortReading(byte *packet, int dataLength)
 void SensorInit()
 {
  // Enable sensors
- byte alivearray[sizeof(I2Cmap)];
+ pinMode((20u), 0x0);
+ pinMode((21u), 0x0);
+ if (digitalRead((20u)) & digitalRead((21u)))
+ {
+  Wire.begin();
+  delay(100);
+  ScanEnable();
+ }
+ else
+ {
+  for (int i=0; i<numSensor; i++)
+  {
+   Wire.begin();
+   delay(100);
+   const Sensor *s = sensor + i;
+   s->disableFunc();
+  }
+ }
+}
+
+void ScanEnable()
+{
+ byte alivearray[I2Cnum];
  int numberalive=0;
  bool skipMCP342X=0x0;
  I2Cscan(&numberalive, alivearray);
@@ -25116,9 +25145,9 @@ void SensorInit()
   const Sensor *s = sensor + i;
   bool isI2C=0x0;
   bool aliveI2C=0x0;
-  for (int j=0; j<sizeof(I2Cmap); j++)
+  for (int j=0; j<I2Cnum; j++)
   {
-   if (s->sensorid==(I2Cmap+j)->sensorid)
+   if (s->sensorid==(I2Cmap[j].sensorid))
    {
     isI2C=0x1;
     break;

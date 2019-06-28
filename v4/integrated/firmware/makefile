@@ -40,6 +40,9 @@ program:
 	$(PRE_FLASH_COMMAND)
 	$(FLASH_BOARD)
 
+program1:
+	$(FLASH_BOARD)
+
 
 run:    install
 	sleep 2
