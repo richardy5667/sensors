@@ -53,10 +53,25 @@ void SensorInit()
 	{
 		for (int i=0; i<numSensor; i++)
 		{
-			Wire.begin();
-			delay(100);
+			bool isI2C=false;
 			const Sensor *s = sensor + i;
-			s->disableFunc();
+			for (int j=0; j<I2Cnum; j++)
+			{
+				if (s->sensorid==(I2Cmap[j].sensorid))
+				{
+					isI2C=true;
+					break;
+				}
+			}
+			if (isI2C)
+			{
+				s->disableFunc();
+			}
+			else
+			{
+				s->enableFunc();
+				s->initFunc();
+			}
 		}
 	}
 }

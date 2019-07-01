@@ -24553,17 +24553,17 @@ void DisableSensorFF()
 
 void ReadSensorFF(byte *sensorReading, int *readingLength)
 {
- int buildinfo_git = (int) strtol("8af6", 0, 16);
+ int buildinfo_git = (int) strtol("d5e7", 0, 16);
 
  sensorReading[0] = 3;
  sensorReading[1] = 1;
  sensorReading[2] = 4;
  sensorReading[3] = 14;
 
- sensorReading[4] = (1561753475 >> 24) & 0xFF;
- sensorReading[5] = (1561753475 >> 16) & 0xFF;
- sensorReading[6] = (1561753475 >> 8) & 0xFF;
- sensorReading[7] = 1561753475 & 0xFF;
+ sensorReading[4] = (1562005526 >> 24) & 0xFF;
+ sensorReading[5] = (1562005526 >> 16) & 0xFF;
+ sensorReading[6] = (1562005526 >> 8) & 0xFF;
+ sensorReading[7] = 1562005526 & 0xFF;
  sensorReading[8] = (buildinfo_git >> 8) & 0xFF;
  sensorReading[9] = buildinfo_git & 0xFF;
 
@@ -24636,6 +24636,10 @@ void I2Cscan(int *count, byte *idarray)
    {
     Wire.write(0xFE); //HTU21D needs a soft reset to respond correctly
    }
+   if (address==0x76)
+      {
+        Wire.write(0x1E); //TSYS01 also needs reset on startup
+      }
       fnd = (Wire.endTransmission () == 0);
       // give device 5 millis
       if (fnd)
@@ -25126,10 +25130,25 @@ void SensorInit()
  {
   for (int i=0; i<numSensor; i++)
   {
-   Wire.begin();
-   delay(100);
+   bool isI2C=0x0;
    const Sensor *s = sensor + i;
-   s->disableFunc();
+   for (int j=0; j<I2Cnum; j++)
+   {
+    if (s->sensorid==(I2Cmap[j].sensorid))
+    {
+     isI2C=0x1;
+     break;
+    }
+   }
+   if (isI2C)
+   {
+    s->disableFunc();
+   }
+   else
+   {
+    s->enableFunc();
+    s->initFunc();
+   }
   }
  }
 }

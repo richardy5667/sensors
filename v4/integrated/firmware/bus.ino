@@ -9,10 +9,14 @@ void I2Cscan(int *count, byte *idarray)
   {
     bool fnd = false;
       Wire.beginTransmission (address);
-			if (address==HTDU21D_ADDRESS)
+			if (address==0x40)
 			{
 				Wire.write(0xFE);	//HTU21D needs a soft reset to respond correctly
 			}
+			if (address==0x76)
+      {
+        Wire.write(0x1E); //TSYS01 also needs reset on startup
+      }
       fnd = (Wire.endTransmission () == 0);
       // give device 5 millis
       if (fnd)
