@@ -22672,7 +22672,7 @@ const I2Caddress I2Cmap[]={
   {0x48,0x01},
   {0x40,0x02},
   {0x77,0x04},
-  {0x1C,0x07},
+  //{0x1C,0x07},
   {0x76,0x09},
   {0x1E,0x0A},
   {0x27,0x0B},
@@ -24553,17 +24553,17 @@ void DisableSensorFF()
 
 void ReadSensorFF(byte *sensorReading, int *readingLength)
 {
- int buildinfo_git = (int) strtol("d5e7", 0, 16);
+ int buildinfo_git = (int) strtol("e1ae", 0, 16);
 
  sensorReading[0] = 3;
  sensorReading[1] = 1;
  sensorReading[2] = 4;
  sensorReading[3] = 14;
 
- sensorReading[4] = (1562005526 >> 24) & 0xFF;
- sensorReading[5] = (1562005526 >> 16) & 0xFF;
- sensorReading[6] = (1562005526 >> 8) & 0xFF;
- sensorReading[7] = 1562005526 & 0xFF;
+ sensorReading[4] = (1562091506 >> 24) & 0xFF;
+ sensorReading[5] = (1562091506 >> 16) & 0xFF;
+ sensorReading[6] = (1562091506 >> 8) & 0xFF;
+ sensorReading[7] = 1562091506 & 0xFF;
  sensorReading[8] = (buildinfo_git >> 8) & 0xFF;
  sensorReading[9] = buildinfo_git & 0xFF;
 
@@ -24631,6 +24631,11 @@ void I2Cscan(int *count, byte *idarray)
   for (byte address = addressStart; address <= addressEnd; address++)
   {
     bool fnd = 0x0;
+   if (address==0x1C)
+   {
+
+   }
+   else {
       Wire.beginTransmission (address);
    if (address==0x40)
    {
@@ -24654,6 +24659,7 @@ void I2Cscan(int *count, byte *idarray)
      }
     }
    }
+  }
   }
 }
 

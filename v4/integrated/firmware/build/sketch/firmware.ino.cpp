@@ -921,31 +921,31 @@ void ReadSensorFF(byte *sensorReading, int *readingLength);
 void WriteSensorFF(byte *packet);
 #line 4 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void I2Cscan(int *count, byte *idarray);
-#line 37 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 43 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadI2C(byte address, int length, byte *out);
-#line 42 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 48 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadI2C(byte address, int length, byte *out, int time);
-#line 61 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 67 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void DirectReadI2C(byte address, int length, byte *out, int time);
-#line 78 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 84 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteI2C(byte address, int length, byte *in);
-#line 88 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 94 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteReadI2C(byte address, int inlength, byte *in, int outlength, byte *out);
-#line 93 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 99 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteReadI2C(byte address, int inlength, byte *in, int outlength, byte *out, int time);
-#line 113 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 119 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 SPISettings SetSPI(long maxSpeed, byte bitOrder, byte dataMode, byte pin);
-#line 143 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 149 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadSPI(byte* buff, int bufflen, byte pin, SPISettings set);
-#line 148 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 154 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void ReadSPI(byte* buff, int bufflen, byte pin, SPISettings set, int msdelay, int delayiter);
-#line 166 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 172 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteSPI(byte* buff, int bufflen, byte pin, SPISettings set);
-#line 171 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 177 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void WriteSPI(byte* buff, int bufflen, byte pin, SPISettings set, int msdelay, int delayiter);
-#line 194 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 200 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 void writeEEPROM(unsigned int memory_address, byte data_byte );
-#line 204 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
+#line 210 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/bus.ino"
 byte readEEPROM(unsigned int memory_address );
 #line 2 "/home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/crc8waggle.ino"
 byte CRCcalc(byte dataLength, byte *packet);
@@ -3135,7 +3135,7 @@ const I2Caddress I2Cmap[]={
   {0x48,0x01},
   {0x40,0x02},
   {0x77,0x04},
-  {0x1C,0x07},
+  //{0x1C,0x07},
   {0x76,0x09},
   {0x1E,0x0A},
   {0x27,0x0B},
@@ -5108,6 +5108,11 @@ void I2Cscan(int *count, byte *idarray)
   for (byte address = addressStart; address <= addressEnd; address++)
   {
     bool fnd = false;
+			if (address==0x1C)
+			{
+
+			}
+			else {
       Wire.beginTransmission (address);
 			if (address==0x40)
 			{
@@ -5131,6 +5136,7 @@ void I2Cscan(int *count, byte *idarray)
 					}
 				}
 			}
+		}
   }
 }
 

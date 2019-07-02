@@ -8,6 +8,11 @@ void I2Cscan(int *count, byte *idarray)
   for (byte address = addressStart; address <= addressEnd; address++)
   {
     bool fnd = false;
+			if (address==0x1C)
+			{
+
+			}
+			else {
       Wire.beginTransmission (address);
 			if (address==0x40)
 			{
@@ -31,6 +36,7 @@ void I2Cscan(int *count, byte *idarray)
 					}
 				}
 			}
+		}
   }
 }
 
