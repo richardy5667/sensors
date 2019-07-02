@@ -4246,8 +4246,7 @@ LOAD /home/waggle-student/Documents/waggle_repo/toolset/arduino-1.6.7/Atmel_SAM/
  *(.rodata .rodata* .gnu.linkonce.r.*)
  .rodata        0x000000000008a20c       0x10 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/firmware.ino.cpp.o
  .rodata._ZL6I2Cmap
-                0x000000000008a21c       0x12 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/firmware.ino.cpp.o
- *fill*         0x000000000008a22e        0x2 
+                0x000000000008a21c       0x14 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/firmware.ino.cpp.o
  .rodata._ZL3bus
                 0x000000000008a230      0x3b8 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/firmware.ino.cpp.o
  .rodata._ZL8parambus
@@ -5087,33 +5086,33 @@ OUTPUT(./build/firmware.ino.elf elf32-littlearm)
  .comment       0x0000000000000000       0x71 /home/waggle-student/.arduino15/packages/arduino/hardware/sam/1.6.12/variants/arduino_due_x/libsam_sam3x8e_gcc_rel.a(uotghs_device.o)
  .comment       0x0000000000000000       0x71 /home/waggle-student/.arduino15/packages/arduino/hardware/sam/1.6.12/variants/arduino_due_x/libsam_sam3x8e_gcc_rel.a(dacc.o)
 
-.debug_info     0x0000000000000000    0x292aa
- .debug_info    0x0000000000000000     0xcaf7 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/firmware.ino.cpp.o
- .debug_info    0x000000000000caf7     0x134f /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/DueTimer/DueTimer.cpp.o
- .debug_info    0x000000000000de46      0x732 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/MCP342X/MCP342X.cpp.o
- .debug_info    0x000000000000e578     0x378f /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/libraries/Wire/Wire.cpp.o
- .debug_info    0x0000000000011d07     0x1a73 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/libraries/SPI/SPI.cpp.o
- .debug_info    0x000000000001377a     0x1604 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/libraries/OneWire/OneWire.cpp.o
- .debug_info    0x0000000000014d7e     0x1a43 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/core/variant.cpp.o
- .debug_info    0x00000000000167c1     0x121e ./build/core/core.a(WInterrupts.c.o)
- .debug_info    0x00000000000179df      0x2da ./build/core/core.a(cortex_handlers.c.o)
- .debug_info    0x0000000000017cb9       0x60 ./build/core/core.a(hooks.c.o)
- .debug_info    0x0000000000017d19      0x27c ./build/core/core.a(itoa.c.o)
- .debug_info    0x0000000000017f95      0x5f2 ./build/core/core.a(syscalls_sam3.c.o)
- .debug_info    0x0000000000018587      0x52f ./build/core/core.a(wiring.c.o)
- .debug_info    0x0000000000018ab6     0x1d7e ./build/core/core.a(wiring_analog.c.o)
- .debug_info    0x000000000001a834      0xe00 ./build/core/core.a(wiring_digital.c.o)
- .debug_info    0x000000000001b634     0x27cd ./build/core/core.a(Print.cpp.o)
- .debug_info    0x000000000001de01      0x3df ./build/core/core.a(Reset.cpp.o)
- .debug_info    0x000000000001e1e0      0x1f6 ./build/core/core.a(RingBuffer.cpp.o)
- .debug_info    0x000000000001e3d6     0x2154 ./build/core/core.a(Stream.cpp.o)
- .debug_info    0x000000000002052a     0x24e3 ./build/core/core.a(UARTClass.cpp.o)
- .debug_info    0x0000000000022a0d      0xbe2 ./build/core/core.a(USARTClass.cpp.o)
- .debug_info    0x00000000000235ef      0x3cf ./build/core/core.a(main.cpp.o)
- .debug_info    0x00000000000239be      0x220 ./build/core/core.a(watchdog.cpp.o)
- .debug_info    0x0000000000023bde     0x2f8e ./build/core/core.a(CDC.cpp.o)
- .debug_info    0x0000000000026b6c     0x209d ./build/core/core.a(USBCore.cpp.o)
- .debug_info    0x0000000000028c09      0x6a1 ./build/core/core.a(PluggableUSB.cpp.o)
+.debug_info     0x0000000000000000    0x2929a
+ .debug_info    0x0000000000000000     0xcae7 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/firmware.ino.cpp.o
+ .debug_info    0x000000000000cae7     0x134f /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/DueTimer/DueTimer.cpp.o
+ .debug_info    0x000000000000de36      0x732 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/MCP342X/MCP342X.cpp.o
+ .debug_info    0x000000000000e568     0x378f /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/libraries/Wire/Wire.cpp.o
+ .debug_info    0x0000000000011cf7     0x1a73 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/libraries/SPI/SPI.cpp.o
+ .debug_info    0x000000000001376a     0x1604 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/libraries/OneWire/OneWire.cpp.o
+ .debug_info    0x0000000000014d6e     0x1a43 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/core/variant.cpp.o
+ .debug_info    0x00000000000167b1     0x121e ./build/core/core.a(WInterrupts.c.o)
+ .debug_info    0x00000000000179cf      0x2da ./build/core/core.a(cortex_handlers.c.o)
+ .debug_info    0x0000000000017ca9       0x60 ./build/core/core.a(hooks.c.o)
+ .debug_info    0x0000000000017d09      0x27c ./build/core/core.a(itoa.c.o)
+ .debug_info    0x0000000000017f85      0x5f2 ./build/core/core.a(syscalls_sam3.c.o)
+ .debug_info    0x0000000000018577      0x52f ./build/core/core.a(wiring.c.o)
+ .debug_info    0x0000000000018aa6     0x1d7e ./build/core/core.a(wiring_analog.c.o)
+ .debug_info    0x000000000001a824      0xe00 ./build/core/core.a(wiring_digital.c.o)
+ .debug_info    0x000000000001b624     0x27cd ./build/core/core.a(Print.cpp.o)
+ .debug_info    0x000000000001ddf1      0x3df ./build/core/core.a(Reset.cpp.o)
+ .debug_info    0x000000000001e1d0      0x1f6 ./build/core/core.a(RingBuffer.cpp.o)
+ .debug_info    0x000000000001e3c6     0x2154 ./build/core/core.a(Stream.cpp.o)
+ .debug_info    0x000000000002051a     0x24e3 ./build/core/core.a(UARTClass.cpp.o)
+ .debug_info    0x00000000000229fd      0xbe2 ./build/core/core.a(USARTClass.cpp.o)
+ .debug_info    0x00000000000235df      0x3cf ./build/core/core.a(main.cpp.o)
+ .debug_info    0x00000000000239ae      0x220 ./build/core/core.a(watchdog.cpp.o)
+ .debug_info    0x0000000000023bce     0x2f8e ./build/core/core.a(CDC.cpp.o)
+ .debug_info    0x0000000000026b5c     0x209d ./build/core/core.a(USBCore.cpp.o)
+ .debug_info    0x0000000000028bf9      0x6a1 ./build/core/core.a(PluggableUSB.cpp.o)
 
 .debug_abbrev   0x0000000000000000     0x5833
  .debug_abbrev  0x0000000000000000      0x881 /home/waggle-student/Documents/waggle_repo/sensors/v4/integrated/firmware/build/sketch/firmware.ino.cpp.o
