@@ -111,18 +111,18 @@ void ScanEnable()
 			}
 			if (!aliveI2C)
 			{
-				if (s->sensorid==0x0D)
-				{
+				//if (s->sensorid==0x0D)
+			//	{
+				//	s->disableFunc();
+				//	(s+1)->disableFunc();
+				//	(s+2)->disableFunc();
+				//	(s+3)->disableFunc();
+				//	skipMCP342X=true;
+				//}
+				//else
+				//{
 					s->disableFunc();
-					(s+1)->disableFunc();
-					(s+2)->disableFunc();
-					(s+3)->disableFunc();
-					skipMCP342X=true;
-				}
-				else
-				{
-					s->disableFunc();
-				}
+				//}
 			}
 			else
 			{
@@ -132,11 +132,11 @@ void ScanEnable()
 		}
 		else
 		{
-			if(!skipMCP342X)
-			{
+		//	if(!skipMCP342X)
+		//	{
 				s->enableFunc();
 				s->initFunc();
-			}
+		//	}
 		}
 	}
 }
