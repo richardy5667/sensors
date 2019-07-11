@@ -22678,6 +22678,9 @@ const I2Caddress I2Cmap[]={
   {0x27,0x0B},
   {0x69,0x0C},
   {0x68,0x0D},
+  {0x68,0x0E},
+  {0x68,0x0F},
+  {0x68,0x10},
   {0x4C,0x13}
 };
 
@@ -24553,17 +24556,17 @@ void DisableSensorFF()
 
 void ReadSensorFF(byte *sensorReading, int *readingLength)
 {
- int buildinfo_git = (int) strtol("458c", 0, 16);
+ int buildinfo_git = (int) strtol("1ab6", 0, 16);
 
  sensorReading[0] = 3;
  sensorReading[1] = 1;
  sensorReading[2] = 4;
  sensorReading[3] = 14;
 
- sensorReading[4] = (1562100518 >> 24) & 0xFF;
- sensorReading[5] = (1562100518 >> 16) & 0xFF;
- sensorReading[6] = (1562100518 >> 8) & 0xFF;
- sensorReading[7] = 1562100518 & 0xFF;
+ sensorReading[4] = (1562857956 >> 24) & 0xFF;
+ sensorReading[5] = (1562857956 >> 16) & 0xFF;
+ sensorReading[6] = (1562857956 >> 8) & 0xFF;
+ sensorReading[7] = 1562857956 & 0xFF;
  sensorReading[8] = (buildinfo_git >> 8) & 0xFF;
  sensorReading[9] = buildinfo_git & 0xFF;
 
@@ -24631,12 +24634,7 @@ void I2Cscan(int *count, byte *idarray)
   for (byte address = addressStart; address <= addressEnd; address++)
   {
     bool fnd = 0x0;
-   if (address==0x1C)
-   {
-
-   }
-   else {
-      Wire.beginTransmission (address);
+   Wire.beginTransmission (address);
    if (address==0x40)
    {
     Wire.write(0xFE); //HTU21D needs a soft reset to respond correctly
@@ -24657,10 +24655,9 @@ void I2Cscan(int *count, byte *idarray)
       idarray[*count]=I2Cmap[i].sensorid;
       (*count)++;
      }
-    }
    }
   }
-  }
+ }
 }
 
 void ReadI2C(byte address, int length, byte *out)
@@ -25194,18 +25191,18 @@ void ScanEnable()
    }
    if (!aliveI2C)
    {
-    if (s->sensorid==0x0D)
-    {
+    //if (s->sensorid==0x0D)
+   //	{
+    //	s->disableFunc();
+    //	(s+1)->disableFunc();
+    //	(s+2)->disableFunc();
+    //	(s+3)->disableFunc();
+    //	skipMCP342X=true;
+    //}
+    //else
+    //{
      s->disableFunc();
-     (s+1)->disableFunc();
-     (s+2)->disableFunc();
-     (s+3)->disableFunc();
-     skipMCP342X=0x1;
-    }
-    else
-    {
-     s->disableFunc();
-    }
+    //}
    }
    else
    {
@@ -25215,11 +25212,11 @@ void ScanEnable()
   }
   else
   {
-   if(!skipMCP342X)
-   {
+  //	if(!skipMCP342X)
+  //	{
     s->enableFunc();
     s->initFunc();
-   }
+  //	}
   }
  }
 }

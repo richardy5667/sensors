@@ -8,12 +8,7 @@ void I2Cscan(int *count, byte *idarray)
   for (byte address = addressStart; address <= addressEnd; address++)
   {
     bool fnd = false;
-			if (address==0x1C)
-			{
-
-			}
-			else {
-      Wire.beginTransmission (address);
+			Wire.beginTransmission (address);
 			if (address==0x40)
 			{
 				Wire.write(0xFE);	//HTU21D needs a soft reset to respond correctly
@@ -34,10 +29,9 @@ void I2Cscan(int *count, byte *idarray)
 						idarray[*count]=I2Cmap[i].sensorid;
 						(*count)++;
 					}
-				}
 			}
 		}
-  }
+	}
 }
 
 void ReadI2C(byte address, int length, byte *out)
